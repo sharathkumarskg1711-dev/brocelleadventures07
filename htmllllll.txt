@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Brocelle Adventures - Intro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="sty.css" />
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_qQ-TQ75M5JbmqES5hUiV982KLa2l5ig"></script>
+</head>
+<body>
+  <!-- Intro / Animation Screen -->
+  <div id="intro-screen">
+    <div class="intro-overlay"></div>
+
+    <div class="intro-content">
+      <h1 class="brand-title">
+        BROCELLE <span>ADVENTURES</span>
+      </h1>
+      <p class="brand-quote">
+        Reboot your soul with sky-high fun and bold adventures.
+      </p>
+
+      <p class="tap-hint">Click anywhere to start your journey</p>
+    </div>
+  </div>
+
+  <!-- Main site -->
+  <main id="main-content">
+    <!-- Welcome + Regions -->
+    <section class="welcome-section">
+      <h2>Welcome to Brocelle Adventures</h2>
+      <p class="welcome-sub">
+        Which part of India do you want to explore?
+      </p>
+    </section>
+
+    <!-- 5 Regions -->
+    <section class="regions-grid" id="regions-grid">
+      <div class="region-card region-north" data-region="north">
+        <div class="region-overlay"></div>
+        <div class="region-content">
+          <h3>Northern India</h3>
+          <p>Mountains • Snow • Temples • Adventure</p>
+        </div>
+      </div>
+
+      <div class="region-card region-south" data-region="south">
+        <div class="region-overlay"></div>
+        <div class="region-content">
+          <h3>Southern India</h3>
+          <p>Beaches • Temples • Greenery • Heritage</p>
+        </div>
+      </div>
+
+      <div class="region-card region-east" data-region="east">
+        <div class="region-overlay"></div>
+        <div class="region-content">
+          <h3>Eastern India</h3>
+          <p>Culture • Tea Gardens • Natural Beauty</p>
+        </div>
+      </div>
+
+      <div class="region-card region-west" data-region="west">
+        <div class="region-overlay"></div>
+        <div class="region-content">
+          <h3>Western India</h3>
+          <p>Deserts • Beaches • Nightlife</p>
+        </div>
+      </div>
+
+      <div class="region-card region-central" data-region="central">
+        <div class="region-overlay"></div>
+        <div class="region-content">
+          <h3>Central India</h3>
+          <p>Wildlife • Forests • Heritage</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Region details (list of states) -->
+    <section id="region-panel" class="region-panel hidden">
+      <button id="back-to-regions" class="back-btn">← Back to India regions</button>
+      <div id="region-header"></div>
+      <div id="states-grid" class="states-grid"></div>
+    </section>
+
+    <!-- State details (places, images, facts) -->
+    <section id="state-panel" class="state-panel hidden">
+      <button id="back-to-region" class="back-btn">← Back to region</button>
+      <div id="state-header"></div>
+      <div id="places-grid" class="places-grid"></div>
+
+      <div id="state-info" class="state-info">
+        <div class="info-block">
+          <h4>How to travel</h4>
+          <ul id="travel-list"></ul>
+        </div>
+        <div class="info-block">
+          <h4>Interesting facts</h4>
+          <ul id="facts-list"></ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================== EXTRA MODALS: PLACE DETAILS / SIGNUP / BOOKING ================== -->
+
+  <!-- Place details overlay -->
+  <div id="place-modal" class="overlay hidden">
+    <div class="overlay-backdrop"></div>
+    <div class="modal-card place-modal-card">
+      <button class="modal-close" data-close="place-modal">×</button>
+
+      <h2 id="place-modal-title"></h2>
+      <p id="place-modal-subtitle" class="modal-subtext"></p>
+
+      <!-- 7–8 image gallery -->
+      <div id="place-gallery" class="place-gallery"></div>
+
+      <!-- Google Maps container -->
+      <div id="place-map" class="place-map"></div>
+
+      <div class="modal-grid two-cols">
+        <div class="info-block">
+          <h4>How to travel</h4>
+          <ul id="place-modal-travel-list"></ul>
+        </div>
+        <div class="info-block">
+          <h4>Interesting facts</h4>
+          <ul id="place-modal-facts-list"></ul>
+        </div>
+      </div>
+
+      <div class="modal-grid three-cols">
+        <div class="info-block">
+          <h4>Special events</h4>
+          <ul id="place-modal-events-list"></ul>
+        </div>
+        <div class="info-block">
+          <h4>Package Includes</h4>
+          <ul id="place-modal-package-include-list"></ul>
+        </div>
+        <div class="info-block">
+          <h4>Popular restaurants</h4>
+          <ul id="place-modal-restaurants-list"></ul>
+        </div>
+      </div>
+
+      <div class="booking-strip">
+        <div class="price-wrap">
+          <span class="price-label">Price per person</span>
+          <span id="place-modal-price" class="price-value blur-price">
+            Sign up to see price
+          </span>
+        </div>
+        <button id="place-book-btn" class="primary-btn">Book now</button>
+      </div>
+
+      <a id="directions-link" href="#" class="directions-link" target="_blank">
+        Click on this to get to know how long your travel will be
+      </a>
+    </div>
+  </div>
+
+  <!-- Signup modal -->
+  <div id="signup-modal" class="overlay hidden">
+    <div class="overlay-backdrop"></div>
+    <div class="modal-card auth-card">
+      <button class="modal-close" data-close="signup-modal">×</button>
+
+      <h2>Sign up to continue</h2>
+      <p class="modal-subtext">
+        Please sign up to unlock the price and get your booking receipt.
+      </p>
+
+      <form id="signup-form" class="auth-form">
+        <label>
+          Full name
+          <input type="text" id="signup-name" required />
+        </label>
+
+        <label>
+          Email (Gmail)
+          <input type="email" id="signup-email" placeholder="example@gmail.com" required />
+        </label>
+
+        <label>
+          Mobile number
+          <input
+            type="tel"
+            id="signup-mobile"
+            pattern="[0-9]{10}"
+            maxlength="10"
+            placeholder="10-digit mobile"
+            required
+          />
+        </label>
+
+        <button type="submit" class="primary-btn full-width">
+          Sign up & continue
+        </button>
+
+        <p id="signup-status" class="helper-text"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Booking modal -->
+  <div id="booking-modal" class="overlay hidden">
+    <div class="overlay-backdrop"></div>
+    <div class="modal-card booking-card">
+      <button class="modal-close" data-close="booking-modal">×</button>
+
+      <h2 id="booking-place-title"></h2>
+      <p class="modal-subtext">
+        Confirm the number of travellers to see your estimated trip cost and receipt.
+      </p>
+
+      <div class="booking-info">
+        <div class="booking-line">
+          <span>Price per person</span>
+          <span id="booking-price"></span>
+        </div>
+
+        <div class="booking-line">
+          <label for="booking-count">Number of persons</label>
+          <input
+            type="number"
+            id="booking-count"
+            min="1"
+            value="1"
+          />
+        </div>
+
+        <div class="booking-line total">
+          <span>Total amount</span>
+          <span id="booking-total"></span>
+        </div>
+      </div>
+
+      <button id="confirm-booking-btn" class="primary-btn full-width">
+        Confirm booking
+      </button>
+
+      <p id="booking-status" class="helper-text"></p>
+    </div>
+  </div>
+  <body class="thank-body">
+
+  <!-- Thank You Section -->
+  <section class="thankyou-section">
+    <h1 class="brand-title">
+      BROCELLE <span>ADVENTURES</span>
+    </h1>
+    <h2 class="thank-text">Thank You for Booking with Us! 🎉</h2>
+    <p class="thank-subtext">Your adventure awaits! Our team will contact you soon.</p>
+  </section>
+
+  <!-- About Us -->
+  <section class="footer-sections">
+    <h2 class="section-title">About Us</h2>
+
+    <div class="team-grid">
+      <div class="team-card">
+        <h3>Nishcal CJ</h3>
+        <p>Marketing Manager</p>
+      </div>
+      <div class="team-card">
+        <h3>Nishanth</h3>
+        <p>Project Manager</p>
+      </div>
+      <div class="team-card">
+        <h3>Jnaneshwar BA</h3>
+        <p>Web Designer</p>
+      </div>
+      <div class="team-card">
+        <h3>Sharath Kumar G</h3>
+        <p>Web Designer</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Us -->
+  <section class="footer-sections">
+    <h2 class="section-title">Contact Us</h2>
+
+    <div class="contact-details">
+      <p><strong>📞 Phone:</strong> +91 9353002782</p>
+      <p><strong>📧 Email:</strong> brocelleadventures07@gmail.com</p>
+    </div>
+  </section>
+
+</body>
+
+  <script src="scri.js" defer></script>
+</body>
+</html>
